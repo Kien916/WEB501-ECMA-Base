@@ -4,6 +4,7 @@ function List() {
   const handleDelete = () => {
     toast.success('Delete successfull')
   }
+ 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-6">Danh sách</h1>
@@ -53,5 +54,4 @@ function List() {
     </div>
   )
 }
-
 export default List
