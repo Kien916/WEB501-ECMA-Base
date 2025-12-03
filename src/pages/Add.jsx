@@ -5,6 +5,7 @@ import axios from 'axios'
 function AddPage() {
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
+  const [image, setImage] = useState('')
   const [category, setCategory] = useState('Tour nội địa')
   const [active, setActive] = useState(false)
 
@@ -14,6 +15,7 @@ function AddPage() {
       await axios.post('http://localhost:3000/tours', {
         name,
         price: Number(price),
+        image,
         category,
         active
       })
@@ -48,6 +50,18 @@ function AddPage() {
             onChange={event => setPrice(event.target.value)}
             type="number"
             className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Image */}
+        <div>
+          <label className="block font-medium mb-1">Image URL</label>
+          <input
+            value={image}
+            onChange={event => setImage(event.target.value)}
+            type="url"
+            className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+            placeholder="https://example.com/tour.jpg"
           />
         </div>
 

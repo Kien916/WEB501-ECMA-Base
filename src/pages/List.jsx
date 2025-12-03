@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 import axios from 'axios'
 
 function ListPage() {
@@ -12,7 +13,7 @@ function ListPage() {
         const { data } = await axios.get('http://localhost:3000/tours')
         setTours(data)
       } catch (error) {
-        toast.error(error)
+        toast.error(error.message)
       }
     }
     getTours()
@@ -26,7 +27,7 @@ function ListPage() {
         toast.success('Ok tao da xoa duoc roi')
       }
     } catch (error) {
-      toast.error(error)
+      toast.error(error.message)
     }
   }
 
@@ -39,14 +40,15 @@ function ListPage() {
             <tr>
               <th className="px-4 py-2 border border-gray-300 text-left">ID</th>
               <th className="px-4 py-2 border border-gray-300 text-left">
+                Image
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left">
                 Name
               </th>
-              <th className="px-4 py-2 border border-gray-300 text-left">
-                Last
-              </th>
-              <th className="px-4 py-2 border border-gray-300 text-left">
-                Handle
-              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Price</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Category</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Active</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Handle</th>
             </tr>
           </thead>
 
@@ -55,11 +57,40 @@ function ListPage() {
               <tr key={tour.id} className="hover:bg-gray-50">
                 <td className="px-4 py-2 border border-gray-300">{tour.id}</td>
                 <td className="px-4 py-2 border border-gray-300">
+                  {tour.image ? (
+                    <img
+                      src={tour.image}
+                      alt={tour.name}
+                      className="w-20 h-14 object-cover rounded"
+                    />
+                  ) : (
+                    <span className="text-gray-400">No image</span>
+                  )}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">
                   {tour.name}
                 </td>
-                <td className="px-4 py-2 border border-gray-300">....</td>
                 <td className="px-4 py-2 border border-gray-300">
-                  <button onClick={() => handleDelete(tour.id)}>Delete</button>
+                  {tour.price?.toLocaleString('vi-VN')}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">
+                  {tour.category || '—'}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">
+                  {tour.active ? 'Active' : 'Inactive'}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">
+                  <div className="flex gap-3">
+                    <Link className="text-blue-600 underline" to={`/edit/${tour.id}`}>
+                      Edit
+                    </Link>
+                    <button
+                      className="text-red-600 underline"
+                      onClick={() => handleDelete(tour.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
