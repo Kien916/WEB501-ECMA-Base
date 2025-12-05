@@ -41,11 +41,17 @@
       "id": 6
     }
   ],
-  "users":[
+  "users": [
     {
       "id": 1,
       "name": "admin",
       "email": "kienkien@1233.com"
+    },
+    {
+      "email": "admin1@test.com",
+      "password": "$2a$10$3nbcAPOepFkQTTdGF.kbtO8t0TWovI2JEo971IHpE.r8haGXu0EuW",
+      "name": "Kiên_Đoàn",
+      "id": 2
     }
   ]
 }
